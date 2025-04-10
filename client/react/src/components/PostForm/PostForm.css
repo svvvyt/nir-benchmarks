@@ -1,0 +1,27 @@
+.post-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 20px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  padding: 16px;
+}
+
+.post-form .input {
+  margin-bottom: 10px;
+}
+
+.post-form .file-input {
+  margin-bottom: 10px;
+}
+
+.post-form .file-input label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.post-form .button {
+  margin-top: 10px;
+}

@@ -1,0 +1,12 @@
+<!-- /client/src/app/components/ui/input/input.component.html -->
+<div class="input">
+  <label *ngIf="label" class="label">{{ label }}</label>
+  <input
+    class="textbox"
+    [placeholder]="placeholder"
+    [value]="value"
+    (input)="onInputChange($event)"
+    (blur)="onTouched()"
+  />
+  <span *ngIf="error" class="error">{{ error }}</span>
+</div>

@@ -1,0 +1,24 @@
+<div class="post-list-container">
+  <app-post-form (onCreate)="handleCreatePost($event)"></app-post-form>
+  <app-post-options
+    [searchQuery]="searchQuery"
+    [selectedSort]="selectedSort"
+    [sortOrder]="sortOrder"
+    (searchQueryChange)="handleSearchQueryChange($event)"
+    (selectedSortChange)="handleSortChange($event)"
+    (sortOrderChange)="handleSortOrderChange($event)"
+  ></app-post-options>
+  <app-loader *ngIf="isLoading"></app-loader>
+  <app-post-list
+    *ngIf="!isLoading"
+    [data]="postList | sortPosts : selectedSort : sortOrder : searchQuery"
+    (onEdit)="handleEditPost($event)"
+    (onDelete)="handleDeletePost($event)"
+  ></app-post-list>
+  <app-modal
+    *ngIf="editingPost"
+    [post]="editingPost"
+    (onUpdate)="handleUpdatePost($event)"
+    (onClose)="editingPost = null"
+  ></app-modal>
+</div>

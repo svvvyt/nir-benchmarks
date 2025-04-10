@@ -1,0 +1,23 @@
+<!-- /client/src/app/pages/post-item-page/post-item-page.component.html -->
+<div class="post-item-container">
+  <app-loader *ngIf="isLoading" text="post-item"></app-loader>
+  <ng-container *ngIf="!isLoading && postItem">
+    <app-post-item
+      [id]="postItem.id"
+      [title]="postItem.title"
+      [text]="postItem.text"
+      [imageUrl]="postItem.imageUrl"
+      [createdAt]="postItem.createdAt"
+      [updatedAt]="postItem.updatedAt"
+      [viewsCount]="postItem.viewsCount"
+      (onEdit)="onEdit()"
+      (onDelete)="handleDeletePost($event)"
+    ></app-post-item>
+    <app-modal
+      *ngIf="isEditing"
+      [post]="postItem"
+      (onUpdate)="handleUpdatePost($event)"
+      (onClose)="isEditing = false"
+    ></app-modal>
+  </ng-container>
+</div>

@@ -1,0 +1,8 @@
+<!-- /client/src/app/components/ui/button/button.component.html -->
+<button
+  class="button"
+  [type]="type"
+  (click)="click.emit(); $event.stopPropagation()"
+>
+  <ng-content></ng-content>
+</button>

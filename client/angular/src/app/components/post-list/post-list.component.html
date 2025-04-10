@@ -1,0 +1,14 @@
+<div class="post-list">
+  <app-post-item
+    *ngFor="let post of data"
+    [id]="post.id"
+    [title]="post.title"
+    [text]="post.text"
+    [imageUrl]="post.imageUrl"
+    [createdAt]="post.createdAt"
+    [updatedAt]="post.updatedAt"
+    [viewsCount]="post.viewsCount"
+    (onEdit)="onEdit.emit($event)"
+    (onDelete)="onDelete.emit($event)"
+  ></app-post-item>
+</div>

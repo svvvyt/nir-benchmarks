@@ -1,0 +1,34 @@
+<!-- /client/src/app/components/ui/modal/modal.component.html -->
+<div class="modal-overlay">
+  <div class="modal-content">
+    <h2>Редактировать пост</h2>
+    <form (ngSubmit)="handleSubmit()">
+      <app-input
+        label="Заголовок"
+        placeholder="Введите заголовок..."
+        [(ngModel)]="title"
+        name="title"
+        required
+      ></app-input>
+      <app-input
+        label="Текст"
+        placeholder="Введите текст..."
+        [(ngModel)]="text"
+        name="text"
+        required
+      ></app-input>
+      <div class="file-input">
+        <input
+          type="file"
+          (change)="handleFileChange($event)"
+          accept="image/*"
+        />
+        <img *ngIf="previewUrl" [src]="previewUrl" alt="Preview" />
+      </div>
+      <div>
+        <app-button type="submit">Сохранить</app-button>
+        <app-button type="button" (click)="onClose.emit()">Отмена</app-button>
+      </div>
+    </form>
+  </div>
+</div>

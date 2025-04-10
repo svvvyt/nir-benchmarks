@@ -1,0 +1,25 @@
+<!-- /client/src/app/components/post-item/post-item.component.html -->
+<div class="post-item">
+  <h2 (click)="handleClick()">{{ title }}</h2>
+  <p>{{ text }}</p>
+  <img
+    *ngIf="imageUrl"
+    [src]="fullImageUrl!"
+    [alt]="title"
+    class="post-image"
+    (error)="handleImageError($event)"
+  />
+  <div class="post-meta">
+    <span>Post ID: {{ id }}</span
+    ><br />
+    <span>Created at: {{ createdAt | date : 'medium' }}</span
+    ><br />
+    <span>Updated at: {{ updatedAt | date : 'medium' }}</span
+    ><br />
+    <span>Views count: {{ viewsCount }}</span>
+  </div>
+  <div class="post-actions">
+    <app-button (click)="onEdit.emit(id)">Редактировать</app-button>
+    <app-button (click)="onDelete.emit(id)">Удалить</app-button>
+  </div>
+</div>

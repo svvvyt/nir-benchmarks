@@ -1,0 +1,18 @@
+<!-- /client/src/app/components/post-options/post-options.component.html -->
+<div class="post-options">
+  <app-input
+    label="Поиск по заголовку"
+    placeholder="Введите текст..."
+    [(ngModel)]="searchQuery"
+    (ngModelChange)="searchQueryChange.emit($event)"
+  ></app-input>
+  <app-select
+    label="Сортировать по"
+    [options]="sortOptions"
+    [(ngModel)]="selectedSort"
+    (ngModelChange)="onSortChange($any($event).toString())"
+  ></app-select>
+  <app-button (click)="toggleSortOrder()">
+    {{ sortOrder === 'asc' ? 'По убыванию' : 'По возрастанию' }}
+  </app-button>
+</div>

@@ -1,0 +1,53 @@
+# Dependency directories
+node_modules/
+
+# Build output
+dist/
+build/
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+.env.*.local
+
+# Editor directories and files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Coverage directory used by testing tools
+coverage/
+
+# Local development servers
+*.local
+
+# Optional npm cache
+.npm/
+
+# Lint cache
+.eslintcache
+.stylelintcache
+
+# Service worker cache
+workbox-config.js
+
+# Angular specific
+.angular/
+
+# Vue specific
+*.local
+*.env.local
+*.env.*.local
+
+# React specific (CRA)
+.cache/

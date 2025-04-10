@@ -1,0 +1,21 @@
+<!-- /client/src/app/components/post-form/post-form.component.html -->
+<form (ngSubmit)="handleSubmit()" class="post-form">
+  <app-input
+    label="Заголовок"
+    placeholder="Введите заголовок..."
+    [(ngModel)]="title"
+    name="title"
+    required
+  ></app-input>
+  <app-input
+    label="Текст"
+    placeholder="Введите текст..."
+    [(ngModel)]="text"
+    name="text"
+    required
+  ></app-input>
+  <div class="file-input">
+    <input type="file" (change)="handleFileChange($event)" accept="image/*" />
+  </div>
+  <app-button type="submit">Создать пост</app-button>
+</form>
