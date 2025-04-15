@@ -1,17 +1,22 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { PostItemProps, SortField, SortOrder } from '../types/index';
+import { PerformanceLoggerService } from '../services/performance-logger.service';
 
 @Pipe({
   name: 'sortPosts',
   pure: true,
 })
 export class SortPostsPipe implements PipeTransform {
+  constructor(private performanceLogger: PerformanceLoggerService) {}
+
   transform(
     posts: PostItemProps[],
     sortField: SortField,
     sortOrder: SortOrder,
     searchQuery: string
   ): PostItemProps[] {
+    const stop = this.performanceLogger.start('ReRenderPerformance');
+
     let filteredPosts = posts.filter((post) =>
       post.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -23,7 +28,7 @@ export class SortPostsPipe implements PipeTransform {
           const dateB = new Date(b[sortField]).getTime();
           return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
         }
-        if (sortField === 'id' || sortField === 'viewsCount') {
+        if (sortField === 'viewsCount') {
           return sortOrder === 'asc'
             ? a[sortField] - b[sortField]
             : b[sortField] - a[sortField];
@@ -32,6 +37,7 @@ export class SortPostsPipe implements PipeTransform {
       });
     }
 
+    stop();
     return filteredPosts;
   }
 }

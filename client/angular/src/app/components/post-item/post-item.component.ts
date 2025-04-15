@@ -1,9 +1,9 @@
-// /client/src/app/components/post-item/post-item.component.ts
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { ButtonComponent } from '../ui/button/button.component';
 import { ApiClientService } from '../../services/api-client.service';
+import { PerformanceLoggerService } from '../../services/performance-logger.service';
 
 @Component({
   selector: 'app-post-item',
@@ -23,10 +23,28 @@ export class PostItemComponent {
   @Output() onEdit = new EventEmitter<number>();
   @Output() onDelete = new EventEmitter<number>();
 
-  constructor(private router: Router, private apiClient: ApiClientService) {}
+  constructor(
+    private router: Router,
+    private apiClient: ApiClientService,
+    private performanceLogger: PerformanceLoggerService
+  ) {}
 
   handleClick() {
+    const stop = this.performanceLogger.start('EventHandlingLatency');
     this.router.navigate([`/posts/${this.id}`]);
+    stop();
+  }
+
+  handleEdit() {
+    const stop = this.performanceLogger.start('EventHandlingLatency');
+    this.onEdit.emit(this.id);
+    stop();
+  }
+
+  handleDelete() {
+    const stop = this.performanceLogger.start('EventHandlingLatency');
+    this.onDelete.emit(this.id);
+    stop();
   }
 
   get fullImageUrl(): string | null {

@@ -5,7 +5,9 @@
 </template>
 
 <script setup>
+import { onMounted } from 'vue';
 import { PostItem } from '@/components';
+import performanceLogger from '@/utils/performanceLogger';
 
 defineProps({
   data: {
@@ -21,7 +23,10 @@ defineProps({
     required: true
   }
 });
+
+onMounted(() => {
+  performanceLogger.measureFPS(() => { });
+});
 </script>
 
-<style scoped>
-</style>
+<style scoped></style>

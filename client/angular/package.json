@@ -6,10 +6,12 @@
     "start": "ng serve --port 3000",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
+    "analyze": "ng build --stats-json && source-map-explorer 'dist/client/browser/*.js'",
     "test": "ng test"
   },
   "private": true,
   "dependencies": {
+    "@angular/cdk": "^19.2.9",
     "@angular/common": "^19.2.0",
     "@angular/compiler": "^19.2.0",
     "@angular/core": "^19.2.0",
@@ -19,6 +21,7 @@
     "@angular/router": "^19.2.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
+    "web-vitals": "^4.2.4",
     "zone.js": "~0.15.0"
   },
   "devDependencies": {
@@ -32,6 +35,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "source-map-explorer": "^2.5.3",
     "typescript": "~5.7.2"
   }
 }

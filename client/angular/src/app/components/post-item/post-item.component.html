@@ -1,4 +1,3 @@
-<!-- /client/src/app/components/post-item/post-item.component.html -->
 <div class="post-item">
   <h2 (click)="handleClick()">{{ title }}</h2>
   <p>{{ text }}</p>
@@ -19,7 +18,7 @@
     <span>Views count: {{ viewsCount }}</span>
   </div>
   <div class="post-actions">
-    <app-button (click)="onEdit.emit(id)">Редактировать</app-button>
-    <app-button (click)="onDelete.emit(id)">Удалить</app-button>
+    <app-button (click)="handleEdit()">Редактировать</app-button>
+    <app-button (click)="handleDelete()">Удалить</app-button>
   </div>
 </div>

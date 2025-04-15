@@ -15,6 +15,7 @@ import { useRoute } from 'vue-router';
 import { PostItem } from '@/components';
 import { Loader, Modal } from '@/components/UI';
 import { apiClient } from '@/api/client';
+import performanceLogger from '@/utils/performanceLogger';
 
 const route = useRoute();
 const postItem = ref(null);
@@ -22,33 +23,43 @@ const isLoading = ref(true);
 const isEditing = ref(false);
 
 onMounted(async () => {
+  const stop = performanceLogger.start('APIResponseTime');
   try {
     const response = await apiClient.get(`/posts/${route.params.id}`);
     postItem.value = response.data;
+    stop();
   } catch (error) {
-    console.error('Error fetching data:', error);
+    stop();
+    performanceLogger.logError('APIResponseTime', error);
   } finally {
     isLoading.value = false;
   }
+  setInterval(() => performanceLogger.getMemoryUsage(), 5000);
 });
 
 const handleUpdatePost = async (formData) => {
+  const stop = performanceLogger.start('APIResponseTime');
   try {
     const response = await apiClient.patch(`/posts/${route.params.id}`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' },
     });
     postItem.value = response.data;
     isEditing.value = false;
+    stop();
   } catch (error) {
-    console.error('Error updating post:', error);
+    stop();
+    performanceLogger.logError('APIResponseTime', error);
   }
 };
 
 const handleDeletePost = async (id) => {
+  const stop = performanceLogger.start('APIResponseTime');
   try {
     await apiClient.delete(`/posts/${id}`);
+    stop();
   } catch (error) {
-    console.error('Error deleting post:', error);
+    stop();
+    performanceLogger.logError('APIResponseTime', error);
   }
 };
 </script>

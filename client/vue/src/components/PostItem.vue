@@ -10,8 +10,8 @@
       <span>Views count: {{ viewsCount }}</span>
     </div>
     <div class="post-actions">
-      <Button @click="onEdit(id)">Редактировать</Button>
-      <Button @click="onDelete(id)">Удалить</Button>
+      <Button @click="handleEdit">Редактировать</Button>
+      <Button @click="handleDelete">Удалить</Button>
     </div>
   </div>
 </template>
@@ -21,6 +21,7 @@ import { computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { Button } from '@/components/UI';
 import { apiClient } from '@/api/client';
+import performanceLogger from '@/utils/performanceLogger';
 
 const props = defineProps({
   id: Number,
@@ -41,7 +42,21 @@ const fullImageUrl = computed(() =>
 );
 
 const handleClick = () => {
+  const stop = performanceLogger.start('EventHandlingLatency');
   router.push(`/posts/${props.id}`);
+  stop();
+};
+
+const handleEdit = () => {
+  const stop = performanceLogger.start('EventHandlingLatency');
+  props.onEdit(props.id);
+  stop();
+};
+
+const handleDelete = () => {
+  const stop = performanceLogger.start('EventHandlingLatency');
+  props.onDelete(props.id);
+  stop();
 };
 
 const handleImageError = (e) => {

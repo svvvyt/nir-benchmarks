@@ -9,7 +9,9 @@ export const getAll = async (req, res) => {
     const posts = await prisma.post.findMany();
     const [seconds, nanoseconds] = process.hrtime(start);
     const durationMs = (seconds * 1000 + nanoseconds / 1e6).toFixed(2);
-    logger.info(`getAll executed in ${durationMs} ms`);
+    logger.info(
+      `getAll executed in ${durationMs} ms; posts fetched: ${posts.length}`
+    );
     res.json(posts);
   } catch (error) {
     logger.error('Error in getAll:', error);
