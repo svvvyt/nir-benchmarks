@@ -6,6 +6,7 @@ function generatePosts(count: number) {
   return Array.from({ length: count }, (_, i) => ({
     title: `Test post ${i + 1}`,
     text: `Test text ${i + 1}`,
+    imageUrl: '/uploads/test-image.jpg',
   }));
 }
 
